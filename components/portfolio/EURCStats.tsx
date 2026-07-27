@@ -1,48 +1,55 @@
 "use client";
 
-import {
-  useAccount,
-  useBalance
-}
-from "wagmi";
+import { useAccount, useReadContracts } from "wagmi";
+import { erc20Abi, formatUnits } from "viem";
+
+const EURC_ADDRESS: `0x${string}` =
+  "0x89B50855Aa3bE2F677cD6303Cec089B5F319D72a";
 
 export default function EURCStats() {
+  const { address } = useAccount();
 
-  const { address } =
-    useAccount();
+  const { data } = useReadContracts({
+    allowFailure: false,
+    contracts: [
+      {
+        address: EURC_ADDRESS,
+        abi: erc20Abi,
+        functionName: "balanceOf",
+        args: address ? [address] : undefined,
+      },
+      {
+        address: EURC_ADDRESS,
+        abi: erc20Abi,
+        functionName: "decimals",
+      },
+    ],
+    query: {
+      enabled: Boolean(address),
+    },
+  });
 
-  const { data } =
-    useBalance({
+  const [rawBalance, decimals] = data ?? [];
 
-      address,
-
-      token:
-        (
-          "0x89B50855Aa3bE2F677cD6303Cec089B5F319D72a" as `0x${string}`
-        )
-
-    });
+  const formatted =
+    rawBalance !== undefined && decimals !== undefined
+      ? Number(formatUnits(rawBalance, decimals))
+      : 0;
 
   return (
-
     <div
       className="
       flex
       flex-col
       "
     >
-
       <span
         className="
         text-4xl
         font-black
         "
       >
-        {
-          Number(
-            data?.formatted ?? 0
-          ).toFixed(2)
-        }
+        {formatted.toFixed(2)}
       </span>
 
       <span
@@ -65,9 +72,6 @@ export default function EURCStats() {
       >
        
       </span>
-
     </div>
-
   );
-
 }
