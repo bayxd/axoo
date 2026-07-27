@@ -10,7 +10,20 @@ import {
   AGENTIC_COMMERCE_ABI,
   ERC20_APPROVE_ABI,
   USDC_ARC_TESTNET,
-} from "@/lib/agenticCommerce";
+} from "@/lib/agent/agenticCommerce";
+
+// Helper to report a timing point to the server -- fire-and-forget, doesn't
+// block the UI. Whoever's browser triggers this (client OR provider,
+// possibly a completely different Chrome profile/device from each other),
+// the server ends up with both halves in one place. See lib/agent/jobTiming.ts
+// for why this moved off localStorage.
+function reportTiming(jobId: bigint, field: "createdAt" | "submittedAt", timestamp: bigint) {
+  fetch("/api/agent/record-timing", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ jobId: jobId.toString(), field, timestamp: timestamp.toString() }),
+  }).catch((error) => console.error("Could not report timing:", error));
+}
 
 export type JobActionStatus =
   | "idle"
@@ -75,6 +88,10 @@ function saveStoredJobIds(address: string, ids: bigint[]) {
     console.error("Could not persist job ids:", error);
   }
 }
+
+// Timing storage now lives server-side -- see lib/agent/jobTiming.ts and
+// the reportTiming() helper above -- so it works regardless of which
+// browser/profile/device the client vs provider each use.
 
 export function useMyJobIds() {
   const { address } = useAccount();
@@ -174,6 +191,16 @@ export function useJobBoard() {
             data: log.data,
           });
           jobId = (decoded.args as { jobId: bigint }).jobId;
+
+          // Capture the timing NOW, from the block this tx actually landed
+          // in -- this is what lets the Speed Bonus Agent work later
+          // without ever needing to search old logs.
+          if (address && receipt?.blockNumber) {
+            const block = await publicClient?.getBlock({ blockNumber: receipt.blockNumber });
+            if (block) {
+              reportTiming(jobId, "createdAt", block.timestamp);
+            }
+          }
         } catch (decodeError) {
           console.error("Could not decode JobCreated log — verify event ABI on explorer:", decodeError);
         }
@@ -305,9 +332,16 @@ export function useJobBoard() {
         args: [jobId, deliverable, "0x"],
       });
       setStatus("confirming");
-      await publicClient?.waitForTransactionReceipt({ hash });
+      const receipt = await publicClient?.waitForTransactionReceipt({ hash });
       setStatus("success");
       toast.success("Deliverable submitted");
+
+      if (address && receipt?.blockNumber) {
+        const block = await publicClient?.getBlock({ blockNumber: receipt.blockNumber });
+        if (block) {
+          reportTiming(jobId, "submittedAt", block.timestamp);
+        }
+      }
     } catch (error) {
       console.error(error);
       setStatus("failed");
@@ -331,6 +365,27 @@ export function useJobBoard() {
       await publicClient?.waitForTransactionReceipt({ hash });
       setStatus("success");
       toast.success("Job completed — USDC released ✅");
+
+      // Speed Bonus Agent: check THIS job only (we already know its ID here
+      // — no scanning the shared contract). Timing (createdAt/submittedAt)
+      // is now looked up server-side by jobId (see lib/agent/jobTiming.ts) —
+      // this hook no longer needs to read/pass it, since it may not even
+      // have both halves locally (the other half could've been recorded
+      // from the OTHER party's browser). Fire-and-forget.
+      fetch("/api/agent/check-bonus", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ jobId: jobId.toString() }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success && data.paid) {
+            toast.success(
+              `🎉 Speed bonus: +${(Number(data.amount) / 1e6).toFixed(2)} USDC — ${data.reason}`
+            );
+          }
+        })
+        .catch((error) => console.error("Speed bonus check failed:", error));
     } catch (error) {
       console.error(error);
       setStatus("failed");

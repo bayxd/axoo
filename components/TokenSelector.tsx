@@ -167,7 +167,7 @@ export default function TokenSelector({ value, onChange, readOnly }: Props) {
               duration-150
               ${
                 token === value
-                  ? "bg-purple-500/15 text-white"
+                  ? "bg-[rgb(var(--brand-1-rgb)/0.15)] text-white"
                   : "text-zinc-300 hover:bg-white/5"
               }
               `}

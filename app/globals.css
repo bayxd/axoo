@@ -33,33 +33,49 @@ html {
   overflow-x: hidden;
 }
 
-/* ---------- LIGHT MODE (default) ---------- */
+/* ==========================================================================
+   BRAND THEME TOKENS
+   `[data-brand-theme]` is set by <ThemeStyleProvider> on a wrapper div right
+   under <body>. Since it's a real DOM element (not just a CSS variable),
+   we can safely move the page background + ambient blobs from `body` onto
+   this wrapper — it still fills the full viewport via the rules below,
+   and everything (cyberpunk vs frutiger, light vs dark) branches from here.
+   ========================================================================== */
 
-body {
-  color: #09090b;
-
-  background:
-    radial-gradient(
-      circle at top left,
-      rgba(168,85,247,.10),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at bottom right,
-      rgba(236,72,153,.08),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at center,
-      rgba(59,130,246,.05),
-      transparent 40%
-    ),
-    #f7f7fb;
-
+[data-brand-theme] {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  position: relative;
   overflow-x: hidden;
 }
 
-body::before {
+/* ---------- CYBERPUNK (default) — light ---------- */
+
+[data-brand-theme="cyberpunk"] {
+  color: #09090b;
+
+  /* Brand color tokens — every component below references these instead
+     of hardcoding purple/pink/blue, so switching theme recolors everything
+     that has been migrated to use them. */
+  --brand-1: #a855f7;   /* purple-500 */
+  --brand-2: #ec4899;   /* pink-500   */
+  --brand-3: #3b82f6;   /* blue-500   */
+  --brand-1-rgb: 168 85 247;
+  --brand-2-rgb: 236 72 153;
+  --brand-3-rgb: 59 130 246;
+  --brand-1-dark: #c084fc; /* purple-400, for dark-mode text tints */
+  --brand-3-dark: #60a5fa; /* blue-400 */
+
+  background:
+    radial-gradient(circle at top left, rgba(168,85,247,.10), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(236,72,153,.08), transparent 30%),
+    radial-gradient(circle at center, rgba(59,130,246,.05), transparent 40%),
+    #f7f7fb;
+}
+
+[data-brand-theme="cyberpunk"]::before {
   content: "";
   position: fixed;
   width: 600px;
@@ -72,7 +88,7 @@ body::before {
   z-index: -1;
 }
 
-body::after {
+[data-brand-theme="cyberpunk"]::after {
   content: "";
   position: fixed;
   width: 600px;
@@ -85,9 +101,105 @@ body::after {
   z-index: -1;
 }
 
+/* ---------- CYBERPUNK — dark ---------- */
+
+.dark [data-brand-theme="cyberpunk"] {
+  color: white;
+
+  background:
+    radial-gradient(circle at top left, rgba(168,85,247,.18), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(236,72,153,.15), transparent 30%),
+    radial-gradient(circle at center, rgba(59,130,246,.08), transparent 40%),
+    #09090b;
+}
+
+.dark [data-brand-theme="cyberpunk"]::before {
+  background: #9333ea;
+  opacity: .18;
+}
+
+.dark [data-brand-theme="cyberpunk"]::after {
+  background: #ec4899;
+  opacity: .15;
+}
+
+/* ---------- FRUTIGER / LIQUID GLASS — light ---------- */
+
+[data-brand-theme="frutiger"] {
+  color: #0c2b3d;
+
+  --brand-1: #38bdf8;   /* sky-400 */
+  --brand-2: #22d3ee;   /* cyan-400 */
+  --brand-3: #0ea5e9;   /* sky-500 */
+  --brand-1-rgb: 56 189 248;
+  --brand-2-rgb: 34 211 238;
+  --brand-3-rgb: 14 165 233;
+  --brand-1-dark: #7dd3fc; /* sky-300, for dark-mode text tints */
+  --brand-3-dark: #67e8f9; /* cyan-300 */
+
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,.12), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(34,211,238,.10), transparent 30%),
+    radial-gradient(circle at center, rgba(14,165,233,.06), transparent 40%),
+    #f0f9ff;
+}
+
+[data-brand-theme="frutiger"]::before {
+  content: "";
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  background: #38bdf8;
+  filter: blur(220px);
+  opacity: .12;
+  top: -200px;
+  left: -200px;
+  z-index: -1;
+}
+
+[data-brand-theme="frutiger"]::after {
+  content: "";
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  background: #22d3ee;
+  filter: blur(220px);
+  opacity: .10;
+  right: -200px;
+  bottom: -200px;
+  z-index: -1;
+}
+
+/* ---------- FRUTIGER — dark ---------- */
+
+.dark [data-brand-theme="frutiger"] {
+  color: #e0f2fe;
+
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,.16), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(34,211,238,.14), transparent 30%),
+    radial-gradient(circle at center, rgba(14,165,233,.08), transparent 40%),
+    #041c2c;
+}
+
+.dark [data-brand-theme="frutiger"]::before {
+  background: #38bdf8;
+  opacity: .2;
+}
+
+.dark [data-brand-theme="frutiger"]::after {
+  background: #22d3ee;
+  opacity: .16;
+}
+
 ::selection {
   background: rgba(168,85,247,.35);
   color: #09090b;
+}
+
+[data-brand-theme="frutiger"] ::selection {
+  background: rgba(56,189,248,.35);
+  color: #0c2b3d;
 }
 
 ::-webkit-scrollbar {
@@ -107,43 +219,16 @@ body::after {
   background: #b8b7c2;
 }
 
-/* ---------- DARK MODE (.dark on <html>) ---------- */
-
-.dark body {
-  color: white;
-
-  background:
-    radial-gradient(
-      circle at top left,
-      rgba(168,85,247,.18),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at bottom right,
-      rgba(236,72,153,.15),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at center,
-      rgba(59,130,246,.08),
-      transparent 40%
-    ),
-    #09090b;
-}
-
-.dark body::before {
-  background: #9333ea;
-  opacity: .18;
-}
-
-.dark body::after {
-  background: #ec4899;
-  opacity: .15;
-}
+/* ---------- DARK MODE (.dark on <html>) — shared, non-brand-specific ---------- */
 
 .dark ::selection {
   background: rgba(168,85,247,.5);
   color: white;
+}
+
+.dark [data-brand-theme="frutiger"] ::selection {
+  background: rgba(56,189,248,.5);
+  color: #e0f2fe;
 }
 
 .dark ::-webkit-scrollbar-track {
@@ -156,6 +241,124 @@ body::after {
 
 .dark ::-webkit-scrollbar-thumb:hover {
   background: #52525b;
+}
+
+/* ==========================================================================
+   CYBERPUNK-SPECIFIC DECORATION → hidden under Frutiger
+   HUD corner brackets and the dot-grid texture are "terminal/HUD" flourishes
+   that belong to the cyberpunk look. Liquid glass reads cleaner without them.
+   ========================================================================== */
+
+[data-brand-theme="frutiger"] .hud-corner {
+  display: none;
+}
+
+[data-brand-theme="frutiger"] .dot-grid-texture {
+  opacity: 0;
+}
+
+/* ==========================================================================
+   GLASS PANEL MATERIAL — the actual "liquid glass" surface
+   Every card wrapper gets `.glass-panel` automatically (added alongside
+   `backdrop-blur-xl`). Under cyberpunk it's a no-op (cards keep their
+   original flat frosted-panel look). Under frutiger, it becomes a real
+   curved-glass surface: reflection sheen across the top, inset highlight,
+   and a soft blue-tinted body instead of plain white/zinc.
+   ========================================================================== */
+
+[data-brand-theme="frutiger"] .glass-panel {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.65),
+    rgba(224,242,254,.45)
+  ) !important;
+  border-color: rgba(255,255,255,.7) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.9),
+    inset 0 -10px 24px rgba(56,189,248,.10),
+    0 8px 32px rgba(14,165,233,.18) !important;
+}
+
+.dark [data-brand-theme="frutiger"] .glass-panel {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.06),
+    rgba(8,47,73,.35)
+  ) !important;
+  border-color: rgba(255,255,255,.12) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.15),
+    inset 0 -10px 24px rgba(8,145,178,.15),
+    0 8px 40px rgba(2,132,199,.25) !important;
+}
+
+[data-brand-theme="frutiger"] .glass-panel::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  left: 12px;
+  right: 12px;
+  top: 4px;
+  height: 35%;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,.85), transparent);
+  filter: blur(1px);
+}
+
+.dark [data-brand-theme="frutiger"] .glass-panel::before {
+  background: linear-gradient(180deg, rgba(255,255,255,.18), transparent);
+}
+
+/* Ambient corner glow — same idea as the navbar's two blur blobs, echoed
+   on every glass card. Uses ::after (not a JS-added div) so it applies
+   automatically to anything carrying `.glass-panel`, with no per-file
+   changes needed. Sits at z-index:-1 relative to the card's own content,
+   and is clipped by the card's `overflow-hidden`, exactly like the navbar. */
+
+[data-brand-theme="frutiger"] .glass-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle 140px at 0% 0%, rgba(34,211,238,.28), transparent 70%),
+    radial-gradient(circle 140px at 100% 100%, rgba(56,189,248,.20), transparent 70%);
+}
+
+.dark [data-brand-theme="frutiger"] .glass-panel::after {
+  background:
+    radial-gradient(circle 140px at 0% 0%, rgba(34,211,238,.14), transparent 70%),
+    radial-gradient(circle 140px at 100% 100%, rgba(56,189,248,.12), transparent 70%);
+}
+
+/* ==========================================================================
+   PAGE-LEVEL AMBIENT BACKGROUND (CyberpunkBackground.tsx)
+   ========================================================================== */
+
+/* Gentle shared "breathing" motion for the 3 full-page glow orbs, replacing
+   Tailwind's animate-pulse/animate-ping so both themes feel equally calm —
+   only the color (via --brand-*-rgb) changes between themes, not the motion. */
+@keyframes ambient-orb-pulse {
+  0%, 100% { opacity: .55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+
+.ambient-orb {
+  animation: ambient-orb-pulse 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-orb {
+    animation: none;
+  }
+}
+
+/* The technical grid backdrop is a cyberpunk/HUD signature regardless of
+   what color it's tinted, so it's hidden entirely under frutiger rather
+   than recolored — liquid glass reads cleaner without grid lines. */
+[data-brand-theme="frutiger"] .cyber-grid-backdrop {
+  display: none;
 }
 
 /* Images */
@@ -183,6 +386,19 @@ a {
   border: 1px solid rgba(255,255,255,.08);
 }
 
+[data-brand-theme="frutiger"] .glass {
+  background: rgba(224,242,254,.55);
+  backdrop-filter: blur(30px) saturate(160%);
+  border: 1px solid rgba(255,255,255,.7);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.8);
+}
+
+.dark [data-brand-theme="frutiger"] .glass {
+  background: rgba(8,47,73,.55);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.12);
+}
+
 /* Gradient text */
 
 .gradient-text {
@@ -192,6 +408,19 @@ a {
       #a855f7,
       #ec4899,
       #3b82f6
+    );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+[data-brand-theme="frutiger"] .gradient-text {
+  background:
+    linear-gradient(
+      90deg,
+      #38bdf8,
+      #22d3ee,
+      #0ea5e9
     );
   -webkit-background-clip: text;
   background-clip: text;
@@ -211,6 +440,12 @@ a {
   transform: translateY(-4px);
   box-shadow:
     0 0 30px rgba(168,85,247,.15);
+}
+
+[data-brand-theme="frutiger"] .card-hover:hover {
+  box-shadow:
+    0 0 30px rgba(14,165,233,.2),
+    inset 0 1px 1px rgba(255,255,255,.5);
 }
 
 @keyframes bridge-flow {

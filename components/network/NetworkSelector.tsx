@@ -180,7 +180,7 @@ export default function NetworkSelector({ value, options, onChange }: Props) {
               duration-150
               ${
                 option.value === value
-                  ? "bg-purple-500/15 text-white"
+                  ? "bg-[rgb(var(--brand-1-rgb)/0.15)] text-white"
                   : "text-zinc-300 hover:bg-white/5"
               }
               `}

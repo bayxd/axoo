@@ -7,7 +7,7 @@ import { AppKit } from "@circle-fin/app-kit";
 import {
   connectBrowserWallet
 } from "@/lib/send/browserWallet";
-import { useBalances } from "@/hooks/swap/useBalances";
+import { useBalances } from "@/hooks/portfolio/useBalances";
 import { recordSnapshot } from "@/lib/history/portfolioSnapshot";
 
 const kit =

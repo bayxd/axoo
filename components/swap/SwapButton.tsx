@@ -52,16 +52,16 @@ export default function SwapButton({
       uppercase
       overflow-hidden
       bg-linear-to-r
-      from-purple-600
-      via-pink-500
-      to-blue-500
+      from-[var(--brand-1)]
+      via-[var(--brand-2)]
+      to-[var(--brand-3)]
       hover:scale-[1.01]
       active:scale-[0.99]
       disabled:opacity-60
       disabled:hover:scale-100
       duration-300
-      shadow-[0_0_20px_rgba(168,85,247,0.25)]
-      hover:shadow-[0_0_28px_rgba(168,85,247,0.4)]
+      shadow-[0_0_20px_rgb(var(--brand-1-rgb)/0.25)]
+      hover:shadow-[0_0_28px_rgb(var(--brand-1-rgb)/0.4)]
       "
 
     >

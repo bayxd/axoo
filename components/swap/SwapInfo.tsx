@@ -28,9 +28,11 @@ export default function SwapInfo({
   className="
   mt-3
   rounded-xl
-  bg-zinc-900/50
+  bg-zinc-100/50
+  dark:bg-zinc-900/50
   border
-  border-white/5
+  border-black/5
+  dark:border-white/5
   p-3.5
   space-y-2.5
   text-xs
@@ -45,7 +47,7 @@ export default function SwapInfo({
 
   </span>
 
-  <span className="font-mono font-semibold text-emerald-400">
+  <span className="font-mono font-semibold text-emerald-600 dark:text-emerald-400">
 
   {quote?.estimatedOutput?.amount ?? "-"}
 
@@ -65,7 +67,7 @@ export default function SwapInfo({
 
   </span>
 
-  <span className="font-mono text-zinc-300">
+  <span className="font-mono text-zinc-700 dark:text-zinc-300">
 
   {quote?.stopLimit?.amount ?? "-"}
 
@@ -77,7 +79,7 @@ export default function SwapInfo({
 
   </div>
 
-  <div className="border-t border-white/5"></div>
+  <div className="border-t border-black/5 dark:border-white/5"></div>
 
   {
 
@@ -111,7 +113,7 @@ export default function SwapInfo({
 
   </span>
 
-  <span className="font-mono text-zinc-300">
+  <span className="font-mono text-zinc-700 dark:text-zinc-300">
 
   {fee.amount}
 
@@ -129,7 +131,7 @@ export default function SwapInfo({
 
   }
 
-  <div className="border-t border-white/5"></div>
+  <div className="border-t border-black/5 dark:border-white/5"></div>
 
   <div className="flex justify-between">
 
@@ -139,7 +141,7 @@ export default function SwapInfo({
 
   </span>
 
-  <span className="font-mono">
+  <span className="font-mono text-zinc-900 dark:text-zinc-100">
 
   {slippage}%
 
@@ -155,7 +157,7 @@ export default function SwapInfo({
 
   </span>
 
-  <span className="text-purple-400 font-medium">
+  <span className="text-[var(--brand-1)] dark:text-[var(--brand-1-dark)] font-medium">
 
   Arc Testnet
 

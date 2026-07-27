@@ -35,7 +35,8 @@ export default function SwapPage() {
           max-w-7xl
           mx-auto
           px-6
-          py-10
+          pt-32
+          pb-10
           "
         >
 
@@ -45,7 +46,7 @@ export default function SwapPage() {
             className="
             max-w-[1100px]
             mx-auto
-            mt-10
+            mt-5
             "
           >
 

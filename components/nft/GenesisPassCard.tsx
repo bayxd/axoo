@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 
 const BADGE_IMAGE =
-  "https://gateway.pinata.cloud/ipfs/bafybeidn35bgjvbbss7vwcu6hfwibumgvkd46uonkiq53eqwbs4hmcdo24";
+  "https://gateway.pinata.cloud/ipfs/bafybeicopxxir4psbrcyezerivqfokx3qabnc3k3uczpefjyv225x3kojy";
 
 const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_GENESIS_PASS_CONTRACT;
 
@@ -42,29 +42,29 @@ export default function GenesisPassCard() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-zinc-900/80 backdrop-blur-xl border border-white/10 rounded-[28px] p-6 shadow-2xl max-w-lg mx-auto genesis-card">
+    <section className="relative overflow-hidden bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl glass-panel border border-black/5 dark:border-white/10 rounded-[28px] p-6 shadow-2xl max-w-lg mx-auto genesis-card">
 
       {/* animated shimmer top strip (replaces the static gradient strip) */}
       <div className="absolute top-0 left-0 right-0 h-0.5 shimmer-strip" />
 
       {/* HUD corner brackets */}
-      <div className="pointer-events-none absolute top-3 left-3 h-3 w-3 border-t border-l border-purple-500/50 rounded-tl-sm" />
-      <div className="pointer-events-none absolute top-3 right-3 h-3 w-3 border-t border-r border-blue-500/50 rounded-tr-sm" />
-      <div className="pointer-events-none absolute bottom-3 left-3 h-3 w-3 border-b border-l border-purple-500/25 rounded-bl-sm" />
-      <div className="pointer-events-none absolute bottom-3 right-3 h-3 w-3 border-b border-r border-blue-500/25 rounded-br-sm" />
+      <div className="pointer-events-none absolute top-3 left-3 h-3 w-3 border-t border-l border-[rgb(var(--brand-1-rgb)/0.5)] rounded-tl-sm hud-corner" />
+      <div className="pointer-events-none absolute top-3 right-3 h-3 w-3 border-t border-r border-[rgb(var(--brand-3-rgb)/0.5)] rounded-tr-sm hud-corner" />
+      <div className="pointer-events-none absolute bottom-3 left-3 h-3 w-3 border-b border-l border-[rgb(var(--brand-1-rgb)/0.25)] rounded-bl-sm hud-corner" />
+      <div className="pointer-events-none absolute bottom-3 right-3 h-3 w-3 border-b border-r border-[rgb(var(--brand-3-rgb)/0.25)] rounded-br-sm hud-corner" />
 
       <div className="relative">
 
         <div className="flex items-center justify-between mb-4">
           <div>
-            <p className="text-[10px] tracking-[0.2em] text-purple-400/80 font-semibold uppercase mb-1">
+            <p className="text-[10px] tracking-[0.2em] text-[var(--brand-1)]/80 dark:text-[var(--brand-1-dark)]/80 font-semibold uppercase mb-1">
               // Genesis Registry
             </p>
-            <h2 className="text-xl font-bold tracking-tight">My Genesis Pass</h2>
+            <h2 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white">My Genesis Pass</h2>
           </div>
           <div className="flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[10px] font-semibold tracking-wide text-emerald-400 uppercase">
+            <span className="text-[10px] font-semibold tracking-wide text-emerald-600 dark:text-emerald-400 uppercase">
               Owned
             </span>
           </div>
@@ -76,7 +76,7 @@ export default function GenesisPassCard() {
           onMouseMove={handleMouseMove}
           onMouseEnter={() => setHovering(true)}
           onMouseLeave={handleMouseLeave}
-          className="relative rounded-2xl overflow-hidden border border-white/10 badge-wrapper"
+          className="relative rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 badge-wrapper"
           style={{
             transform: `perspective(900px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) scale(${hovering ? 1.02 : 1})`,
           }}
@@ -119,22 +119,22 @@ export default function GenesisPassCard() {
         </div>
 
         <div className="mt-5">
-          <h3 className="text-base font-bold">ARCora Early Access Badge</h3>
+          <h3 className="text-base font-bold text-zinc-900 dark:text-white">Axoo Early Access Badge</h3>
           <p className="text-zinc-500 text-sm mt-1">Genesis Collection</p>
         </div>
 
-        <div className="mt-5 pt-4 border-t border-white/5 space-y-2 text-xs">
+        <div className="mt-5 pt-4 border-t border-black/5 dark:border-white/5 space-y-2 text-xs">
           <div className="flex justify-between">
             <span className="text-zinc-500">Collection</span>
-            <span className="font-semibold">Genesis</span>
+            <span className="font-semibold text-zinc-900 dark:text-zinc-100">Genesis</span>
           </div>
           <div className="flex justify-between">
             <span className="text-zinc-500">Network</span>
-            <span className="text-purple-400 font-medium">Arc Testnet</span>
+            <span className="text-[var(--brand-1)] dark:text-[var(--brand-1-dark)] font-medium">Arc Testnet</span>
           </div>
           <div className="flex justify-between">
             <span className="text-zinc-500">Contract</span>
-            <span className="font-mono">
+            <span className="font-mono text-zinc-900 dark:text-zinc-100">
               {CONTRACT_ADDRESS
                 ? `${CONTRACT_ADDRESS.slice(0, 6)}...${CONTRACT_ADDRESS.slice(-4)}`
                 : "-"}
@@ -152,10 +152,14 @@ export default function GenesisPassCard() {
             block
             text-center
             mt-5
-            bg-zinc-800
+            bg-zinc-100
+            dark:bg-zinc-800
+            text-zinc-900
+            dark:text-zinc-100
             border
-            border-white/5
-            hover:border-purple-500/40
+            border-black/5
+            dark:border-white/5
+            hover:border-[rgb(var(--brand-1-rgb)/0.4)]
             duration-300
             rounded-xl
             py-2.5
@@ -173,10 +177,10 @@ export default function GenesisPassCard() {
         .shimmer-strip {
           background: linear-gradient(
             90deg,
-            #9333ea,
-            #ec4899,
-            #3b82f6,
-            #9333ea
+            var(--brand-1),
+            var(--brand-2),
+            var(--brand-3),
+            var(--brand-1)
           );
           background-size: 300% 100%;
           animation: shimmerMove 4s linear infinite;
@@ -198,7 +202,7 @@ export default function GenesisPassCard() {
         .badge-glow {
           background: radial-gradient(
             circle at 50% 50%,
-            rgba(168, 85, 247, 0.35),
+            rgb(var(--brand-1-rgb) / 0.35),
             transparent 65%
           );
           animation: glowPulse 3.5s ease-in-out infinite;
@@ -252,14 +256,14 @@ export default function GenesisPassCard() {
         }
         .explorer-link:hover {
           transform: scale(1.015);
-          box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
+          box-shadow: 0 0 20px rgb(var(--brand-1-rgb) / 0.25);
         }
 
         .genesis-card {
           transition: box-shadow 300ms ease;
         }
         .genesis-card:hover {
-          box-shadow: 0 0 40px rgba(168, 85, 247, 0.12);
+          box-shadow: 0 0 40px rgb(var(--brand-1-rgb) / 0.12);
         }
       `}</style>
     </section>

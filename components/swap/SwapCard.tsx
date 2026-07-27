@@ -6,7 +6,7 @@ import { useSwap } from "@/hooks/swap/useSwap";
 import { useTokens } from "@/hooks/swap/useTokens";
 import { useSlippage } from "@/hooks/swap/useSlippage";
 import { useAmount } from "@/hooks/swap/useAmount";
-import { useBalances } from "@/hooks/swap/useBalances";
+import { useBalances } from "@/hooks/portfolio/useBalances";
 
 import SwapResultCard from "@/components/swap/SwapResultCard";
 import SwapInput from "@/components/swap/SwapInput";
@@ -57,30 +57,30 @@ export default function SwapCard() {
         max-w-[600px]
         mx-auto
         overflow-hidden
-        bg-zinc-900/80
-        backdrop-blur-xl
+        bg-white/80 dark:bg-zinc-900/80
+        backdrop-blur-xl glass-panel
         border
-        border-white/10
+        border-black/5 dark:border-white/10
         rounded-[28px]
         p-6
         shadow-2xl
       "
     >
       {/* neon top strip */}
-      <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-purple-600 via-pink-500 to-blue-500" />
+      <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-[var(--brand-1)] via-[var(--brand-2)] to-[var(--brand-3)]" />
 
       {/* HUD corner brackets */}
-      <div className="pointer-events-none absolute top-3 left-3 h-3 w-3 border-t border-l border-purple-500/50 rounded-tl-sm" />
-      <div className="pointer-events-none absolute top-3 right-3 h-3 w-3 border-t border-r border-blue-500/50 rounded-tr-sm" />
-      <div className="pointer-events-none absolute bottom-3 left-3 h-3 w-3 border-b border-l border-purple-500/25 rounded-bl-sm" />
-      <div className="pointer-events-none absolute bottom-3 right-3 h-3 w-3 border-b border-r border-blue-500/25 rounded-br-sm" />
+      <div className="pointer-events-none absolute top-3 left-3 h-3 w-3 border-t border-l border-[rgb(var(--brand-1-rgb)/0.5)] rounded-tl-sm hud-corner" />
+      <div className="pointer-events-none absolute top-3 right-3 h-3 w-3 border-t border-r border-[rgb(var(--brand-3-rgb)/0.5)] rounded-tr-sm hud-corner" />
+      <div className="pointer-events-none absolute bottom-3 left-3 h-3 w-3 border-b border-l border-[rgb(var(--brand-1-rgb)/0.25)] rounded-bl-sm hud-corner" />
+      <div className="pointer-events-none absolute bottom-3 right-3 h-3 w-3 border-b border-r border-[rgb(var(--brand-3-rgb)/0.25)] rounded-br-sm hud-corner" />
 
       {/* subtle dot grid texture */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        className="pointer-events-none absolute inset-0 opacity-[0.06] dot-grid-texture"
         style={{
           backgroundImage:
-            "radial-gradient(circle, rgba(168,85,247,0.7) 1px, transparent 1px)",
+            "radial-gradient(circle, rgb(var(--brand-1-rgb) / 0.7) 1px, transparent 1px)",
           backgroundSize: "18px 18px",
         }}
       />
@@ -89,14 +89,14 @@ export default function SwapCard() {
         {/* HEADER */}
         <div className="flex items-center justify-between mb-4">
           <div>
-            <p className="text-[10px] tracking-[0.2em] text-purple-400/80 font-semibold uppercase mb-1">
+            <p className="text-[10px] tracking-[0.2em] text-[var(--brand-1)]/80 dark:text-[var(--brand-1-dark)]/80 font-semibold uppercase mb-1">
               // Dex Terminal
             </p>
-            <h2 className="text-xl font-bold tracking-tight">Swap</h2>
+            <h2 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white">Swap</h2>
           </div>
           <div className="flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[10px] font-semibold tracking-wide text-emerald-400">
+            <span className="text-[10px] font-semibold tracking-wide text-emerald-600 dark:text-emerald-400">
               LIVE
             </span>
           </div>

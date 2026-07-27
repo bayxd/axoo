@@ -32,12 +32,12 @@ export default function SwapDirectionButton({
         rounded-full
         bg-zinc-900
         border
-        border-purple-500/30
+        border-[rgb(var(--brand-1-rgb)/0.3)]
         text-sm
         text-zinc-300
-        shadow-[0_0_12px_rgba(168,85,247,0.25)]
-        hover:border-purple-500/60
-        hover:shadow-[0_0_18px_rgba(168,85,247,0.4)]
+        shadow-[0_0_12px_rgb(var(--brand-1-rgb)/0.25)]
+        hover:border-[rgb(var(--brand-1-rgb)/0.6)]
+        hover:shadow-[0_0_18px_rgb(var(--brand-1-rgb)/0.4)]
         hover:rotate-180
         hover:scale-110
         hover:text-white

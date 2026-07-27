@@ -42,10 +42,10 @@ export default function PerformanceChart() {
       className="
       relative
       overflow-hidden
-      bg-zinc-900/70
-      backdrop-blur-xl
+      bg-white/70 dark:bg-zinc-900/70
+      backdrop-blur-xl glass-panel
       border
-      border-white/10
+      border-black/5 dark:border-white/10
       rounded-3xl
       p-8
       shadow-2xl
@@ -54,10 +54,10 @@ export default function PerformanceChart() {
 
       {/* subtle dot grid texture */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        className="pointer-events-none absolute inset-0 opacity-[0.06] dot-grid-texture"
         style={{
           backgroundImage:
-            "radial-gradient(circle, rgba(168,85,247,0.7) 1px, transparent 1px)",
+            "radial-gradient(circle, rgb(var(--brand-1-rgb) / 0.7) 1px, transparent 1px)",
           backgroundSize: "18px 18px",
         }}
       />
@@ -74,7 +74,7 @@ export default function PerformanceChart() {
         >
 
           <div>
-            <p className="text-[10px] tracking-[0.2em] text-purple-400/80 font-semibold uppercase mb-1 font-mono">
+            <p className="text-[10px] tracking-[0.2em] text-[var(--brand-1)]/80 dark:text-[var(--brand-1-dark)]/80 font-semibold uppercase mb-1 font-mono">
               // Growth Trace
             </p>
             <h2
@@ -82,6 +82,8 @@ export default function PerformanceChart() {
               text-2xl
               font-bold
               tracking-tight
+              text-zinc-900
+              dark:text-white
               "
             >
               Performance
@@ -92,9 +94,11 @@ export default function PerformanceChart() {
             className="
             flex
             gap-2
-            bg-zinc-800/60
+            bg-zinc-100/60
+            dark:bg-zinc-800/60
             border
-            border-white/5
+            border-black/5
+            dark:border-white/5
             rounded-full
             p-1
             "
@@ -128,11 +132,11 @@ export default function PerformanceChart() {
 
                       ?
 
-                      "bg-linear-to-r from-purple-600 via-pink-500 to-blue-500 text-white shadow-[0_0_12px_rgba(168,85,247,0.4)]"
+                      "bg-linear-to-r from-[var(--brand-1)] via-[var(--brand-2)] to-[var(--brand-3)] text-white shadow-[0_0_12px_rgb(var(--brand-1-rgb)/0.4)]"
 
                       :
 
-                      "text-zinc-400 hover:text-white"
+                      "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
                     }
                     `}
                   >
@@ -165,16 +169,16 @@ export default function PerformanceChart() {
 
                 <defs>
                   <linearGradient id="performanceLine" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="#a855f7" />
-                    <stop offset="50%" stopColor="#ec4899" />
-                    <stop offset="100%" stopColor="#3b82f6" />
+                    <stop offset="0%" stopColor="var(--brand-1)" />
+                    <stop offset="50%" stopColor="var(--brand-2)" />
+                    <stop offset="100%" stopColor="var(--brand-3)" />
                   </linearGradient>
                 </defs>
 
                 <Tooltip
                   contentStyle={{
                     background: "rgba(24,24,27,0.9)",
-                    border: "1px solid rgba(168,85,247,0.3)",
+                    border: "1px solid rgb(var(--brand-1-rgb) / 0.3)",
                     borderRadius: "12px",
                     color: "#fff",
                     fontSize: "12px"
@@ -207,10 +211,10 @@ export default function PerformanceChart() {
             // State jujur kalau histori belum cukup — daripada nampilin garis
             // palsu yang seolah-olah tren asli.
             <div className="h-full flex flex-col items-center justify-center text-center gap-2">
-              <p className="text-sm text-zinc-400">
+              <p className="text-sm text-zinc-600 dark:text-zinc-400">
                 Not enough history yet for this period.
               </p>
-              <p className="text-xs text-zinc-500 max-w-xs">
+              <p className="text-xs text-zinc-500 dark:text-zinc-500 max-w-xs">
                 Performance is tracked from your real balance each time you open
                 this page. Check back after a bit more activity.
               </p>

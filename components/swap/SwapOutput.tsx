@@ -22,14 +22,17 @@ export default function SwapOutput({
   return (
     <div
       className="
-        bg-zinc-800/80
+        bg-zinc-100/80
+        dark:bg-zinc-800/80
         border
-        border-white/5
+        border-black/5
+        dark:border-white/5
         rounded-2xl
         p-4
         mt-2
-        hover:border-blue-500/30
-        hover:bg-zinc-800
+        hover:border-[rgb(var(--brand-3-rgb)/0.3)]
+        hover:bg-zinc-200
+        dark:hover:bg-zinc-800
         duration-300
       "
     >
@@ -39,12 +42,12 @@ export default function SwapOutput({
         </p>
 
         <p className="text-[11px] font-mono text-zinc-500">
-          Bal <span className="text-zinc-300">{balance.toFixed(4)}</span> {tokenOut}
+          Bal <span className="text-zinc-700 dark:text-zinc-300">{balance.toFixed(4)}</span> {tokenOut}
         </p>
       </div>
 
       <div className="flex items-center justify-between mt-2.5">
-        <div className="text-3xl font-bold font-mono tabular-nums text-emerald-400">
+        <div className="text-3xl font-bold font-mono tabular-nums text-emerald-600 dark:text-emerald-400">
           {displayAmount}
         </div>
 

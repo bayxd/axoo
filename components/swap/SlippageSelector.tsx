@@ -82,11 +82,11 @@ export default function SlippageSelector({
 
                     ?
 
-                    "bg-purple-600 border-purple-500 text-white shadow-[0_0_12px_rgba(168,85,247,0.4)]"
+                    "bg-[var(--brand-1)] border-[var(--brand-1)] text-white shadow-[0_0_12px_rgb(var(--brand-1-rgb)/0.4)]"
 
                     :
 
-                    "bg-zinc-800/80 border-white/5 text-zinc-400 hover:bg-zinc-700"
+                    "bg-zinc-100/80 dark:bg-zinc-800/80 border-black/5 dark:border-white/5 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700"
 
                 }
 

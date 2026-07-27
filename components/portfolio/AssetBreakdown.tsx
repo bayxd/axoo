@@ -49,14 +49,14 @@ export default function AssetBreakdown() {
         className="pointer-events-none absolute inset-0 opacity-[0.06]"
         style={{
           backgroundImage:
-            "radial-gradient(circle, rgba(168,85,247,0.7) 1px, transparent 1px)",
+            "radial-gradient(circle, rgb(var(--brand-1-rgb) / 0.7) 1px, transparent 1px)",
           backgroundSize: "18px 18px",
         }}
       />
 
       <div className="relative">
 
-        <p className="text-[10px] tracking-[0.2em] text-purple-400/80 font-semibold uppercase mb-1 font-mono">
+        <p className="text-[10px] tracking-[0.2em] text-[var(--brand-1-dark)]/80 font-semibold uppercase mb-1 font-mono">
           // Balance Sheet
         </p>
 
@@ -87,14 +87,14 @@ export default function AssetBreakdown() {
             border-white/5
             rounded-2xl
             p-4
-            hover:border-purple-500/20
+            hover:border-[rgb(var(--brand-1-rgb)/0.2)]
             duration-300
             "
           >
             <div className="flex items-center gap-2">
               <span
                 className="h-1.5 w-1.5 rounded-full"
-                style={{ backgroundColor: "#a855f7", boxShadow: "0 0 6px #a855f7" }}
+                style={{ backgroundColor: "var(--brand-1)", boxShadow: "0 0 6px var(--brand-1)" }}
               />
               <span className="text-zinc-400 text-xs uppercase tracking-widest font-semibold">
                 USDC
@@ -127,14 +127,14 @@ export default function AssetBreakdown() {
             border-white/5
             rounded-2xl
             p-4
-            hover:border-blue-500/20
+            hover:border-[rgb(var(--brand-3-rgb)/0.2)]
             duration-300
             "
           >
             <div className="flex items-center gap-2">
               <span
                 className="h-1.5 w-1.5 rounded-full"
-                style={{ backgroundColor: "#3b82f6", boxShadow: "0 0 6px #3b82f6" }}
+                style={{ backgroundColor: "var(--brand-3)", boxShadow: "0 0 6px var(--brand-3)" }}
               />
               <span className="text-zinc-400 text-xs uppercase tracking-widest font-semibold">
                 EURC

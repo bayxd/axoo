@@ -13,7 +13,7 @@ export default function GenesisPage() {
 
       <div className="flex-1 flex flex-col">
         <RequireGenesisPass>
-          <div className="relative z-10 w-full max-w-[1800px] mx-auto px-8 xl:px-16 py-25">
+          <div className="relative z-10 w-full max-w-[1800px] mx-auto px-8 xl:px-16 pt-32 pb-25 mt-5">
             <GenesisPassCard />
           </div>
         </RequireGenesisPass>

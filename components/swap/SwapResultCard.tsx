@@ -134,7 +134,7 @@ export default function SwapResultCard({
         text-xs
         font-semibold
         hover:bg-zinc-700
-        hover:border-purple-500/30
+        hover:border-[rgb(var(--brand-1-rgb)/0.3)]
         duration-300
         "
 

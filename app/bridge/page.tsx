@@ -37,7 +37,8 @@ export default function BridgePage() {
             mx-auto
             px-8
             xl:px-16
-            py-25
+            pt-32
+            pb-25
             space-y-10
             "
           >
@@ -47,6 +48,7 @@ export default function BridgePage() {
               max-w-[1100px]
               mx-auto
               space-y-10
+              mt-5
               "
             >
 

@@ -25,14 +25,17 @@ const ERC20_ABI = [
 
 export function useTokenBalance(
   tokenAddress: `0x${string}`,
-  decimals = 6
+  decimals = 6,
+  chainId?: number
 ) {
 
   const { address } =
     useAccount();
 
   const {
-    data
+    data,
+    isLoading,
+    isError,
   } =
     useReadContract({
 
@@ -48,16 +51,26 @@ export function useTokenBalance(
       args:
         address
           ? [address]
-          : undefined
+          : undefined,
+
+      chainId,
+
+      query: {
+        enabled: !!address,
+      },
 
     });
 
-  return Number(
-    formatUnits(
-      (data as bigint)
-      ?? BigInt(0),
-      decimals
-    )
-  );
+  return {
+    value: Number(
+      formatUnits(
+        (data as bigint)
+        ?? BigInt(0),
+        decimals
+      )
+    ),
+    isLoading,
+    isError,
+  };
 
 }

@@ -1,10 +1,15 @@
+"use client";
+
 import ConnectWallet from "@/components/ConnectWallet";
 import Footer from "@/components/dashboard/Footer";
 import PortfolioSummary from "@/components/portfolio/PortfolioSummary";
 import PerformanceChart from "@/components/portfolio/PerformanceChart";
 import CyberpunkBackground from "@/components/ui/CyberpunkBackground";
+import { usePortfolioHistorySnapshot } from "@/hooks/portfolio/usePortfolioHistory";
 
 export default function PortfolioPage() {
+
+  usePortfolioHistorySnapshot();
 
   return (
 
@@ -34,7 +39,8 @@ export default function PortfolioPage() {
           mx-auto
           px-8
           xl:px-16
-          py-10
+          pt-32
+          pb-10
           space-y-10
           "
         >

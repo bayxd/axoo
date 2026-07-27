@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { useAccount, useReadContract } from "wagmi";
 import { CHAINS } from "@/constants/chains";
 import { useBridge } from "@/hooks/bridge/useBridge";
-import { useBalances } from "@/hooks/swap/useBalances";
+import { useBalances } from "@/hooks/portfolio/useBalances";
 import NetworkSelector from "@/components/network/NetworkSelector";
 
 // Official Circle testnet USDC addresses (source: circlefin/skills use-usdc
@@ -177,29 +177,29 @@ export default function BridgeCard() {
     max-w-[600px]
     mx-auto
     overflow-hidden
-    bg-zinc-900/80
-    backdrop-blur-xl
+    bg-white/80 dark:bg-zinc-900/80
+    backdrop-blur-xl glass-panel
     border
-    border-white/10
+    border-black/5 dark:border-white/10
     rounded-[28px]
     p-6
     shadow-2xl">
 
       {/* neon top strip */}
-      <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-purple-600 via-pink-500 to-blue-500" />
+      <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-[var(--brand-1)] via-[var(--brand-2)] to-[var(--brand-3)]" />
 
       {/* HUD corner brackets */}
-      <div className="pointer-events-none absolute top-3 left-3 h-3 w-3 border-t border-l border-purple-500/50 rounded-tl-sm" />
-      <div className="pointer-events-none absolute top-3 right-3 h-3 w-3 border-t border-r border-blue-500/50 rounded-tr-sm" />
-      <div className="pointer-events-none absolute bottom-3 left-3 h-3 w-3 border-b border-l border-purple-500/25 rounded-bl-sm" />
-      <div className="pointer-events-none absolute bottom-3 right-3 h-3 w-3 border-b border-r border-blue-500/25 rounded-br-sm" />
+      <div className="pointer-events-none absolute top-3 left-3 h-3 w-3 border-t border-l border-[rgb(var(--brand-1-rgb)/0.5)] rounded-tl-sm hud-corner" />
+      <div className="pointer-events-none absolute top-3 right-3 h-3 w-3 border-t border-r border-[rgb(var(--brand-3-rgb)/0.5)] rounded-tr-sm hud-corner" />
+      <div className="pointer-events-none absolute bottom-3 left-3 h-3 w-3 border-b border-l border-[rgb(var(--brand-1-rgb)/0.25)] rounded-bl-sm hud-corner" />
+      <div className="pointer-events-none absolute bottom-3 right-3 h-3 w-3 border-b border-r border-[rgb(var(--brand-3-rgb)/0.25)] rounded-br-sm hud-corner" />
 
       {/* subtle dot grid texture */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        className="pointer-events-none absolute inset-0 opacity-[0.06] dot-grid-texture"
         style={{
           backgroundImage:
-            "radial-gradient(circle, rgba(168,85,247,0.7) 1px, transparent 1px)",
+            "radial-gradient(circle, rgb(var(--brand-1-rgb) / 0.7) 1px, transparent 1px)",
           backgroundSize: "18px 18px",
         }}
       />
@@ -208,12 +208,12 @@ export default function BridgeCard() {
 
         <div className="flex items-center justify-between mb-4">
           <div>
-            <p className="text-[10px] tracking-[0.2em] text-purple-400/80 font-semibold uppercase mb-1">
+            <p className="text-[10px] tracking-[0.2em] text-[var(--brand-1)]/80 dark:text-[var(--brand-1-dark)]/80 font-semibold uppercase mb-1">
               // Cross-Chain Relay
             </p>
-            <h2 className="text-xl font-bold tracking-tight">Bridge</h2>
+            <h2 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white">Bridge</h2>
           </div>
-          <div className="bg-purple-500/15 border border-purple-500/30 rounded-full px-3 py-1 text-purple-300 text-[10px] font-mono font-semibold tracking-widest">
+          <div className="bg-[rgb(var(--brand-1-rgb)/0.15)] border border-[rgb(var(--brand-1-rgb)/0.3)] rounded-full px-3 py-1 text-[var(--brand-1)] dark:text-[var(--brand-1-dark)] text-[10px] font-mono font-semibold tracking-widest">
             USDC
           </div>
         </div>
@@ -221,7 +221,7 @@ export default function BridgeCard() {
         <div className="relative">
 
           {/* FROM */}
-          <div className="bg-zinc-800/80 border border-white/5 rounded-2xl p-4 relative z-30 hover:border-purple-500/20 duration-300">
+          <div className="bg-zinc-100/80 dark:bg-zinc-800/80 border border-black/5 dark:border-white/5 rounded-2xl p-4 relative z-30 hover:border-[rgb(var(--brand-1-rgb)/0.2)] duration-300">
             <div className="flex items-center gap-2">
               <span
                 className="w-1.5 h-1.5 rounded-full"
@@ -236,11 +236,11 @@ export default function BridgeCard() {
                     "Loading balance..."
                   ) : (
                     <>
-                      Bal <span className="text-zinc-300">{(fromBalance ?? 0).toFixed(4)}</span> USDC
+                      Bal <span className="text-zinc-700 dark:text-zinc-300">{(fromBalance ?? 0).toFixed(4)}</span> USDC
                       <button
                         type="button"
                         onClick={() => setAmount(String(fromBalance ?? 0))}
-                        className="ml-1.5 text-purple-400 hover:text-purple-300 font-semibold"
+                        className="ml-1.5 text-[var(--brand-1)] hover:text-[var(--brand-1)] dark:text-[var(--brand-1-dark)] dark:hover:text-[var(--brand-1-dark)] font-semibold"
                       >
                         MAX
                       </button>
@@ -255,7 +255,7 @@ export default function BridgeCard() {
                 type="number"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="bg-transparent outline-none text-3xl font-bold font-mono tabular-nums w-32"
+                className="bg-transparent outline-none text-3xl font-bold font-mono tabular-nums w-32 text-zinc-900 dark:text-zinc-100"
               />
 
               {direction === "toArc" ? (
@@ -265,7 +265,7 @@ export default function BridgeCard() {
                   onChange={setOtherChain}
                 />
               ) : (
-                <div className="bg-zinc-700/80 border border-white/5 rounded-full px-4 py-2 text-sm font-semibold">
+                <div className="bg-zinc-200/80 dark:bg-zinc-700/80 border border-black/5 dark:border-white/5 rounded-full px-4 py-2 text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                   Arc Testnet
                 </div>
               )}
@@ -303,13 +303,13 @@ export default function BridgeCard() {
               w-9 h-9
               rounded-full
               bg-zinc-900
-              border border-purple-500/30
+              border border-[rgb(var(--brand-1-rgb)/0.3)]
               flex items-center justify-center
               text-sm
-              text-zinc-300
-              shadow-[0_0_12px_rgba(168,85,247,0.25)]
-              hover:border-purple-500/60
-              hover:shadow-[0_0_18px_rgba(168,85,247,0.4)]
+              text-zinc-700 dark:text-zinc-300
+              shadow-[0_0_12px_rgb(var(--brand-1-rgb)/0.25)]
+              hover:border-[rgb(var(--brand-1-rgb)/0.6)]
+              hover:shadow-[0_0_18px_rgb(var(--brand-1-rgb)/0.4)]
               hover:text-white
               hover:scale-110
               active:scale-95
@@ -321,7 +321,7 @@ export default function BridgeCard() {
           </div>
 
           {/* TO */}
-          <div className="bg-zinc-800/80 border border-white/5 rounded-2xl p-4 relative z-10 hover:border-blue-500/20 duration-300">
+          <div className="bg-zinc-100/80 dark:bg-zinc-800/80 border border-black/5 dark:border-white/5 rounded-2xl p-4 relative z-10 hover:border-[rgb(var(--brand-3-rgb)/0.2)] duration-300">
             <div className="flex items-center gap-2">
               <span
                 className="w-1.5 h-1.5 rounded-full"
@@ -333,12 +333,12 @@ export default function BridgeCard() {
             </div>
 
             {direction === "toArc" ? (
-              <div className="text-3xl font-bold font-mono mt-2.5 text-emerald-400">
+              <div className="text-3xl font-bold font-mono mt-2.5 text-emerald-600 dark:text-emerald-400">
                 Arc Testnet
               </div>
             ) : (
               <div className="flex items-center justify-between mt-2.5">
-                <div className="text-3xl font-bold font-mono text-emerald-400">
+                <div className="text-3xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                   {otherChainInfo.label}
                 </div>
 
@@ -373,16 +373,16 @@ export default function BridgeCard() {
           uppercase
           overflow-hidden
           bg-linear-to-r
-          from-purple-600
-          via-pink-500
-          to-blue-500
+          from-[var(--brand-1)]
+          via-[var(--brand-2)]
+          to-[var(--brand-3)]
           hover:scale-[1.01]
           active:scale-[0.99]
           disabled:opacity-60
           disabled:hover:scale-100
           duration-300
-          shadow-[0_0_20px_rgba(168,85,247,0.25)]
-          hover:shadow-[0_0_28px_rgba(168,85,247,0.4)]
+          shadow-[0_0_20px_rgb(var(--brand-1-rgb)/0.25)]
+          hover:shadow-[0_0_28px_rgb(var(--brand-1-rgb)/0.4)]
           "
         >
           <span className="relative z-10">

@@ -38,13 +38,16 @@ export default function SwapInput({
 
     <div
       className="
-      bg-zinc-800/80
+      bg-zinc-100/80
+      dark:bg-zinc-800/80
       border
-      border-white/5
+      border-black/5
+      dark:border-white/5
       rounded-2xl
       p-4
-      hover:border-purple-500/30
-      hover:bg-zinc-800
+      hover:border-[rgb(var(--brand-1-rgb)/0.3)]
+      hover:bg-zinc-200
+      dark:hover:bg-zinc-800
       duration-300
       "
     >
@@ -76,7 +79,7 @@ export default function SwapInput({
           text-zinc-500
           "
         >
-          Bal <span className="text-zinc-300">{balance.toFixed(4)}</span> {tokenIn}
+          Bal <span className="text-zinc-700 dark:text-zinc-300">{balance.toFixed(4)}</span> {tokenIn}
         </p>
 
       </div>
@@ -112,6 +115,8 @@ export default function SwapInput({
           font-mono
           tabular-nums
           w-32
+          text-zinc-900
+          dark:text-zinc-100
           "
 
         />

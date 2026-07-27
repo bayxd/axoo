@@ -23,8 +23,10 @@ export default function SendPage() {
               mx-auto
               px-8
               xl:px-16
-              py-25
+              pt-32
+              pb-25
               space-y-16
+              mt-5
             "
           >
             {/* Send Card */}

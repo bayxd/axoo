@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
 
@@ -19,11 +20,11 @@ export default function Footer() {
     >
 
       {/* neon top strip */}
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-linear-to-r from-purple-600/60 via-pink-500/60 to-blue-500/60" />
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-linear-to-r from-[rgb(var(--brand-1-rgb)/0.6)] via-[rgb(var(--brand-2-rgb)/0.6)] to-[rgb(var(--brand-3-rgb)/0.6)]" />
 
       {/* soft glow accents */}
-      <div className="pointer-events-none absolute -top-24 left-1/4 h-48 w-48 rounded-full bg-purple-600/10 blur-3xl" />
-      <div className="pointer-events-none absolute -top-24 right-1/4 h-48 w-48 rounded-full bg-blue-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute -top-24 left-1/4 h-48 w-48 rounded-full bg-[rgb(var(--brand-1-rgb)/0.1)] blur-3xl" />
+      <div className="pointer-events-none absolute -top-24 right-1/4 h-48 w-48 rounded-full bg-[rgb(var(--brand-3-rgb)/0.1)] blur-3xl" />
 
       <div
         className="
@@ -42,51 +43,17 @@ export default function Footer() {
 
         <div>
 
-          <Link href="/" className="flex items-center gap-2 justify-center md:justify-start">
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 64 64"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient id="footerArcoraGradient" x1="0" y1="0" x2="64" y2="64">
-                  <stop offset="0%" stopColor="#EC4899" />
-                  <stop offset="55%" stopColor="#C084FC" />
-                  <stop offset="100%" stopColor="#60A5FA" />
-                </linearGradient>
-              </defs>
-              <path
-                d="
-                M32 8
-                L10 48
-                C8 52 10 56 15 56
-                H22
-                L32 38
-                L42 56
-                H49
-                C54 56 56 52 54 48
-                L32 8Z
-                "
-                fill="url(#footerArcoraGradient)"
-              />
-              <path
-                d="
-                M32 21
-                L22 40
-                H28
-                L32 33
-                L36 40
-                H42
-                L32 21Z
-                "
-                fill="#0B0B0F"
-              />
-            </svg>
+          <Link href="/" className="flex items-center gap-3 justify-center md:justify-start">
+            <Image
+              src="/logo.png"
+              alt="Axoo"
+              width={35}
+              height={35}
+              className="scale-125 drop-shadow-[0_0_6px_rgb(var(--brand-1-rgb)/0.4)]"
+            />
 
-            <h3 className="text-lg font-black bg-linear-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent tracking-tight">
-              ARCora
+            <h3 className="text-lg font-black bg-linear-to-r from-[var(--brand-1)] via-[var(--brand-2)] to-[var(--brand-3)] bg-clip-text text-transparent tracking-tight">
+              Axoo
             </h3>
           </Link>
 
@@ -95,7 +62,7 @@ export default function Footer() {
           </p>
 
           <p className="mt-2 text-[11px] font-mono text-zinc-500 dark:text-zinc-600">
-            © 2026 ARCora · Built with Next.js and Circle
+            © 2026 Axoo · Built with Next.js and Circle
           </p>
 
         </div>
@@ -132,10 +99,10 @@ export default function Footer() {
             dark:text-zinc-400
             transition-all
             duration-300
-            hover:border-blue-400/40
-            hover:bg-blue-500/10
-            hover:text-blue-500
-            dark:hover:text-blue-300
+            hover:border-[rgb(var(--brand-3-rgb)/0.4)]
+            hover:bg-[rgb(var(--brand-3-rgb)/0.1)]
+            hover:text-[var(--brand-3)]
+            dark:hover:text-[var(--brand-3-dark)]
             hover:-translate-y-0.5
             "
           >
@@ -152,7 +119,7 @@ export default function Footer() {
           </a>
 
           <a
-            href="https://github.com/Arcticoz/"
+            href="https://github.com/bayxd/axoo/"
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub"
@@ -172,10 +139,10 @@ export default function Footer() {
             text-zinc-500
             transition-all
             duration-300
-            hover:border-purple-400/40
-            hover:bg-purple-500/10
-            hover:text-purple-500
-            dark:hover:text-purple-300
+            hover:border-[rgb(var(--brand-1-rgb)/0.4)]
+            hover:bg-[rgb(var(--brand-1-rgb)/0.1)]
+            hover:text-[var(--brand-1)]
+            dark:hover:text-[var(--brand-1-dark)]
             hover:-translate-y-0.5
             "
           >
@@ -211,10 +178,10 @@ export default function Footer() {
             text-zinc-500
             transition-all
             duration-300
-            hover:border-pink-400/40
-            hover:bg-pink-500/10
-            hover:text-pink-500
-            dark:hover:text-pink-300
+            hover:border-[rgb(var(--brand-2-rgb)/0.4)]
+            hover:bg-[rgb(var(--brand-2-rgb)/0.1)]
+            hover:text-[var(--brand-2)]
+            dark:hover:text-[var(--brand-2)]
             hover:-translate-y-0.5
             "
           >
@@ -229,8 +196,8 @@ export default function Footer() {
             </svg>
           </a>
 
-                    <a
-            href="https://x.com/ArcoraApp"
+          <a
+            href="https://x.com/AxooApp"
             target="_blank"
             rel="noreferrer"
             aria-label="X (Twitter)"
@@ -243,14 +210,17 @@ export default function Footer() {
             justify-center
             rounded-full
             border
-            border-white/10
-            bg-white/[0.03]
+            border-black/10
+            dark:border-white/10
+            bg-black/[0.03]
+            dark:bg-white/[0.03]
             text-zinc-500
             transition-all
             duration-300
-            hover:border-pink-400/40
-            hover:bg-pink-500/10
-            hover:text-pink-300
+            hover:border-[rgb(var(--brand-2-rgb)/0.4)]
+            hover:bg-[rgb(var(--brand-2-rgb)/0.1)]
+            hover:text-[var(--brand-2)]
+            dark:hover:text-[var(--brand-2)]
             hover:-translate-y-0.5
             "
           >
@@ -264,6 +234,7 @@ export default function Footer() {
               <path d="M18.9 1.9h3.6l-7.9 9 9.3 12.2h-7.3l-5.7-7.5-6.5 7.5H1L9.4 14 .5 1.9h7.5l5.2 6.9 5.7-6.9Zm-1.3 19h2L6.5 3.9H4.3L17.6 20.9Z" />
             </svg>
           </a>
+
 
         </div>
 

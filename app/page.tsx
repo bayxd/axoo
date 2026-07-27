@@ -122,7 +122,7 @@ const ROADMAP_STATUS_STYLE: Record<
     label: "In Progress",
     dot: "bg-blue-400",
     badge:
-      "bg-blue-500/15 text-blue-500 dark:text-blue-400 border-blue-500/30",
+      "bg-blue-500/15 text-[var(--brand-3)] dark:text-[var(--brand-3-dark)] border-blue-500/30",
   },
   planned: {
     label: "Planned",
@@ -202,14 +202,14 @@ export default function Page() {
       <ConnectWallet />
 
       {/* Hero */}
-      <section className="relative flex flex-col items-center justify-center min-h-[85vh] overflow-hidden px-6">
+      <section className="relative flex flex-col items-center justify-center min-h-[85vh] overflow-hidden px-6 pt-32">
 
         {/* grid backdrop */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.15]"
+          className="pointer-events-none absolute inset-0 opacity-[0.15] cyber-grid-backdrop"
           style={{
             backgroundImage:
-              "linear-gradient(to right, rgba(168,85,247,0.35) 1px, transparent 1px), linear-gradient(to bottom, rgba(168,85,247,0.35) 1px, transparent 1px)",
+              "linear-gradient(to right, rgb(var(--brand-1-rgb)/0.35) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--brand-1-rgb)/0.35) 1px, transparent 1px)",
             backgroundSize: "56px 56px",
             maskImage:
               "radial-gradient(ellipse 60% 55% at 50% 42%, black 30%, transparent 100%)",
@@ -219,11 +219,11 @@ export default function Page() {
         />
 
         {/* glow background */}
-        <div className="absolute w-125 h-125 bg-purple-500/20 blur-[120px] rounded-full animate-pulse" />
-        <div className="absolute w-87.5 h-87.5 bg-pink-500/20 blur-[100px] rounded-full animate-ping" />
+        <div className="absolute w-125 h-125 bg-[rgb(var(--brand-1-rgb)/0.2)] blur-[120px] rounded-full ambient-orb" />
+        <div className="absolute w-87.5 h-87.5 bg-[rgb(var(--brand-2-rgb)/0.2)] blur-[100px] rounded-full ambient-orb" style={{ animationDelay: "1.2s" }} />
 
         {/* eyebrow status tag */}
-        <div className="relative z-10 mb-7 flex items-center gap-2 rounded-full border border-purple-500/30 bg-white/70 dark:bg-zinc-900/60 backdrop-blur px-4 py-1.5 shadow-[0_0_16px_rgba(168,85,247,0.15)]">
+        <div className="relative z-10 mb-7 flex items-center gap-2 rounded-full border border-[rgb(var(--brand-1-rgb)/0.3)] bg-white/70 dark:bg-zinc-900/60 backdrop-blur px-4 py-1.5 shadow-[0_0_16px_rgb(var(--brand-1-rgb)/0.15)]">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
           <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
             Arc Testnet · Network Online
@@ -234,39 +234,39 @@ export default function Page() {
         <div className="relative z-10 w-56 h-56 flex items-center justify-center mb-10">
 
           <div
-            className="absolute inset-0 rounded-full border border-dashed border-purple-500/30 animate-spin"
+            className="absolute inset-0 rounded-full border border-dashed border-[rgb(var(--brand-1-rgb)/0.3)] animate-spin hud-corner"
             style={{ animationDuration: "22s" }}
           />
 
           <div
-            className="absolute inset-6 rounded-full border border-blue-500/20 animate-spin"
+            className="absolute inset-6 rounded-full border border-[rgb(var(--brand-3-rgb)/0.2)] animate-spin hud-corner"
             style={{ animationDuration: "14s", animationDirection: "reverse" }}
           />
 
-          <div className="pointer-events-none absolute -top-1 -left-1 h-4 w-4 border-t border-l border-purple-400/60" />
-          <div className="pointer-events-none absolute -top-1 -right-1 h-4 w-4 border-t border-r border-blue-400/60" />
-          <div className="pointer-events-none absolute -bottom-1 -left-1 h-4 w-4 border-b border-l border-purple-400/30" />
-          <div className="pointer-events-none absolute -bottom-1 -right-1 h-4 w-4 border-b border-r border-blue-400/30" />
+          <div className="pointer-events-none absolute -top-1 -left-1 h-4 w-4 border-t border-l border-[rgb(var(--brand-1-rgb)/0.6)] hud-corner" />
+          <div className="pointer-events-none absolute -top-1 -right-1 h-4 w-4 border-t border-r border-[rgb(var(--brand-3-rgb)/0.6)] hud-corner" />
+          <div className="pointer-events-none absolute -bottom-1 -left-1 h-4 w-4 border-b border-l border-[rgb(var(--brand-1-rgb)/0.3)] hud-corner" />
+          <div className="pointer-events-none absolute -bottom-1 -right-1 h-4 w-4 border-b border-r border-[rgb(var(--brand-3-rgb)/0.3)] hud-corner" />
 
           <div
-            className="absolute inset-0 animate-spin"
+            className="absolute inset-0 animate-spin hud-corner"
             style={{ animationDuration: "9s" }}
           >
-            <span className="absolute top-0 left-1/2 -translate-x-1/2 h-2 w-2 rounded-full bg-blue-400 shadow-[0_0_8px_#60a5fa]" />
+            <span className="absolute top-0 left-1/2 -translate-x-1/2 h-2 w-2 rounded-full bg-[var(--brand-3)] shadow-[0_0_8px_var(--brand-3)]" />
           </div>
           <div
-            className="absolute inset-0 animate-spin"
+            className="absolute inset-0 animate-spin hud-corner"
             style={{ animationDuration: "13s", animationDirection: "reverse" }}
           >
-            <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-2 w-2 rounded-full bg-pink-400 shadow-[0_0_8px_#f472b6]" />
+            <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-2 w-2 rounded-full bg-[var(--brand-2)] shadow-[0_0_8px_var(--brand-2)]" />
           </div>
 
-          <div className="relative w-32 h-32 rounded-full bg-linear-to-tr from-purple-500 via-pink-500 to-blue-500 animate-spin-slow shadow-2xl" />
+          <div className="relative w-32 h-32 rounded-full overflow-hidden bg-linear-to-tr from-[var(--brand-1)] via-[var(--brand-2)] to-[var(--brand-3)] animate-spin-slow shadow-2xl hero-orb" />
         </div>
 
         {/* headline */}
         <h1 className="relative z-10 text-center text-4xl sm:text-6xl font-black tracking-tight mb-4 leading-tight">
-          <span className="bg-linear-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-[var(--brand-1)] via-[var(--brand-2)] to-[var(--brand-3)] bg-clip-text text-transparent">
             Swap, Bridge, and Trade 
           </span>
           <br />
@@ -292,11 +292,11 @@ export default function Page() {
             tracking-wide
             text-white
             bg-linear-to-r
-            from-purple-600
-            via-pink-500
-            to-blue-500
-            shadow-[0_0_20px_rgba(168,85,247,0.25)]
-            hover:shadow-[0_0_28px_rgba(168,85,247,0.4)]
+            from-[var(--brand-1)]
+            via-[var(--brand-2)]
+            to-[var(--brand-3)]
+            shadow-[0_0_20px_rgb(var(--brand-1-rgb)/0.25)]
+            hover:shadow-[0_0_28px_rgb(var(--brand-1-rgb)/0.4)]
             hover:scale-[1.02]
             duration-300
             flex
@@ -320,7 +320,7 @@ export default function Page() {
             bg-white/70
             dark:bg-zinc-900/60
             backdrop-blur
-            hover:border-purple-500/30
+            hover:border-[rgb(var(--brand-1-rgb)/0.3)]
             hover:bg-zinc-100
             dark:hover:bg-zinc-800
             duration-300
@@ -339,13 +339,13 @@ export default function Page() {
         {/* status ticker */}
         <div className="relative z-10 mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-mono text-zinc-500 dark:text-zinc-500">
           <div>
-            <span className="text-purple-500 dark:text-purple-400 font-semibold">USDC</span>
+            <span className="text-[var(--brand-1)] dark:text-[var(--brand-1-dark)] font-semibold">USDC</span>
             <span className="mx-1.5 text-zinc-400 dark:text-zinc-700">·</span>
             <span className="text-zinc-500 dark:text-zinc-400">EURC</span>
           </div>
           <div className="h-3 w-px bg-black/10 dark:bg-white/10 hidden sm:block" />
           <div>
-            Chain: <span className="text-blue-500 dark:text-blue-400">Arc-Testnet</span>
+            Chain: <span className="text-[var(--brand-3)] dark:text-[var(--brand-3-dark)]">Arc-Testnet</span>
           </div>
           <div className="h-3 w-px bg-black/10 dark:bg-white/10 hidden sm:block" />
           <div>
@@ -358,7 +358,7 @@ export default function Page() {
       {/* How it works */}
       <section className="relative max-w-5xl mx-auto px-6 py-20">
         <div className="text-center mb-14">
-          <p className="text-[10px] tracking-[0.2em] text-purple-500 dark:text-purple-400/80 font-semibold uppercase mb-2 font-mono">
+          <p className="text-[10px] tracking-[0.2em] text-[var(--brand-1)] dark:text-[var(--brand-1-dark)]/80 font-semibold uppercase mb-2 font-mono">
             // Getting Started
           </p>
           <h2 className="text-3xl font-bold tracking-tight">How it works</h2>
@@ -372,7 +372,7 @@ export default function Page() {
               relative
               bg-white/70
               dark:bg-zinc-900/70
-              backdrop-blur-xl
+              backdrop-blur-xl glass-panel
               border
               border-black/5
               dark:border-white/10
@@ -380,7 +380,7 @@ export default function Page() {
               p-6
               "
             >
-              <span className="text-4xl font-black bg-linear-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent">
+              <span className="text-4xl font-black bg-linear-to-r from-[var(--brand-1)] via-[var(--brand-2)] to-[var(--brand-3)] bg-clip-text text-transparent">
                 {step.n}
               </span>
               <h3 className="text-lg font-bold mt-3 mb-2">{step.title}</h3>
@@ -395,7 +395,7 @@ export default function Page() {
       {/* Feature grid */}
       <section className="relative max-w-5xl mx-auto px-6 py-10">
         <div className="text-center mb-14">
-          <p className="text-[10px] tracking-[0.2em] text-purple-500 dark:text-purple-400/80 font-semibold uppercase mb-2 font-mono">
+          <p className="text-[10px] tracking-[0.2em] text-[var(--brand-1)] dark:text-[var(--brand-1-dark)]/80 font-semibold uppercase mb-2 font-mono">
             // What You Can Do
           </p>
           <h2 className="text-3xl font-bold tracking-tight">Four ways to move money</h2>
@@ -412,20 +412,20 @@ export default function Page() {
               overflow-hidden
               bg-white/70
               dark:bg-zinc-900/70
-              backdrop-blur-xl
+              backdrop-blur-xl glass-panel
               border
               border-black/5
               dark:border-white/10
               rounded-3xl
               p-6
-              hover:border-purple-500/30
+              hover:border-[rgb(var(--brand-1-rgb)/0.3)]
               duration-300
               "
             >
-              <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-purple-600 via-pink-500 to-blue-500 opacity-0 group-hover:opacity-100 duration-300" />
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-[var(--brand-1)] via-[var(--brand-2)] to-[var(--brand-3)] opacity-0 group-hover:opacity-100 duration-300" />
 
               <div className="flex items-center justify-between mb-3">
-                <p className="text-[10px] tracking-[0.2em] text-purple-500 dark:text-purple-400/80 font-semibold uppercase font-mono">
+                <p className="text-[10px] tracking-[0.2em] text-[var(--brand-1)] dark:text-[var(--brand-1-dark)]/80 font-semibold uppercase font-mono">
                   {f.tag}
                 </p>
 
@@ -451,7 +451,7 @@ export default function Page() {
           className="
           bg-white/70
           dark:bg-zinc-900/70
-          backdrop-blur-xl
+          backdrop-blur-xl glass-panel
           border
           border-black/5
           dark:border-white/10
@@ -479,7 +479,7 @@ export default function Page() {
       {/* Roadmap */}
       <section className="relative max-w-5xl mx-auto px-6 py-20">
         <div className="text-center mb-14">
-          <p className="text-[10px] tracking-[0.2em] text-purple-500 dark:text-purple-400/80 font-semibold uppercase mb-2 font-mono">
+          <p className="text-[10px] tracking-[0.2em] text-[var(--brand-1)] dark:text-[var(--brand-1-dark)]/80 font-semibold uppercase mb-2 font-mono">
             // Where We're Headed
           </p>
           <h2 className="text-3xl font-bold tracking-tight">Roadmap</h2>
@@ -496,7 +496,7 @@ export default function Page() {
                 overflow-hidden
                 bg-white/70
                 dark:bg-zinc-900/70
-                backdrop-blur-xl
+                backdrop-blur-xl glass-panel
                 border
                 border-black/5
                 dark:border-white/10
@@ -504,10 +504,10 @@ export default function Page() {
                 p-6
                 "
               >
-                <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-purple-600 via-pink-500 to-blue-500" />
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-[var(--brand-1)] via-[var(--brand-2)] to-[var(--brand-3)]" />
 
                 <div className="flex items-center justify-between mb-3">
-                  <p className="text-[10px] tracking-[0.2em] text-purple-500 dark:text-purple-400/80 font-semibold uppercase font-mono">
+                  <p className="text-[10px] tracking-[0.2em] text-[var(--brand-1)] dark:text-[var(--brand-1-dark)]/80 font-semibold uppercase font-mono">
                     // {stage.phase}
                   </p>
 
@@ -527,7 +527,7 @@ export default function Page() {
                       key={item}
                       className="flex items-start gap-2.5 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed"
                     >
-                      <span className="mt-1.5 h-1 w-1 rounded-full bg-purple-400 shrink-0" />
+                      <span className="mt-1.5 h-1 w-1 rounded-full bg-[var(--brand-1)] shrink-0" />
                       {item}
                     </li>
                   ))}
@@ -541,7 +541,7 @@ export default function Page() {
       {/* FAQ */}
       <section className="relative max-w-3xl mx-auto px-6 py-20">
         <div className="text-center mb-10">
-          <p className="text-[10px] tracking-[0.2em] text-purple-500 dark:text-purple-400/80 font-semibold uppercase mb-2 font-mono">
+          <p className="text-[10px] tracking-[0.2em] text-[var(--brand-1)] dark:text-[var(--brand-1-dark)]/80 font-semibold uppercase mb-2 font-mono">
             // FAQ
           </p>
           <h2 className="text-3xl font-bold tracking-tight">Common questions</h2>

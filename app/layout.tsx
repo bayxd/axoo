@@ -1,7 +1,9 @@
 import "./globals.css";
 import { Providers } from "./providers";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
+import { ThemeStyleProvider } from "@/context/ThemeStyleContext";
 import { Toaster } from "sonner";
+import LiquidCursor from "@/components/ui/LiquidCursor";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 
 const spaceGrotesk = Space_Grotesk({
@@ -31,15 +33,18 @@ export default function RootLayout({children,}: {
           enableSystem={false}
           disableTransitionOnChange
         >
-          <Providers>
-            <div className="flex-1 flex flex-col">
-              {children}
-            </div>
-          </Providers>
-          <Toaster
-            richColors
-            position="top-right"
-          />
+          <ThemeStyleProvider>
+            <Providers>
+              <div className="flex-1 flex flex-col">
+                {children}
+              </div>
+            </Providers>
+            <LiquidCursor />
+            <Toaster
+              richColors
+              position="top-right"
+            />
+          </ThemeStyleProvider>
         </ThemeProvider>
       </body>
     </html>
