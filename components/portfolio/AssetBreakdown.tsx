@@ -1,34 +1,48 @@
 "use client";
 
-import { useAccount, useBalance } from "wagmi";
+import { useAccount, useReadContract } from "wagmi";
+import { formatUnits } from "viem";
+
+const USDC_ADDRESS = "0x3600000000000000000000000000000000000000" as const;
+const EURC_ADDRESS = "0x89B50855Aa3bE2F677cD6303Cec089B5F319D72a" as const;
+
+// wagmi v3's useBalance dropped support for ERC-20 `token` param (it's
+// native-chain-balance only now -- see viem's getBalance split into
+// public.getBalance vs token.getBalance). This reads ERC-20 balance the
+// same way the rest of this app already does elsewhere (balanceOf via
+// useReadContract), rather than relying on a wagmi convenience that no
+// longer exists in v3.
+const ERC20_BALANCE_ABI = [
+  {
+    name: "balanceOf",
+    type: "function",
+    stateMutability: "view",
+    inputs: [{ name: "owner", type: "address" }],
+    outputs: [{ type: "uint256" }],
+  },
+] as const;
+
+function useTokenBalance(tokenAddress: `0x${string}`) {
+  const { address } = useAccount();
+
+  const { data } = useReadContract({
+    address: tokenAddress,
+    abi: ERC20_BALANCE_ABI,
+    functionName: "balanceOf",
+    args: address ? [address] : undefined,
+    query: { enabled: !!address },
+  });
+
+  // USDC/EURC both use 6 decimals on Arc, consistent with the rest of this
+  // app (parseUnits(amount, 6) is used throughout for both tokens).
+  return data !== undefined ? formatUnits(data as bigint, 6) : undefined;
+}
 
 export default function AssetBreakdown() {
-
-  const { address } =
-    useAccount();
-
-  const { data: usdc } =
-    useBalance({
-
-      address,
-
-      token:
-"0x3600000000000000000000000000000000000000" as `0x${string}`
-
-    });
-
-  const { data: eurc } =
-    useBalance({
-
-      address,
-
-      token:
-        "0x89B50855Aa3bE2F677cD6303Cec089B5F319D72a" as `0x${string}`
-
-    });
+  const usdcFormatted = useTokenBalance(USDC_ADDRESS);
+  const eurcFormatted = useTokenBalance(EURC_ADDRESS);
 
   return (
-
     <section
       className="
       relative
@@ -42,8 +56,6 @@ export default function AssetBreakdown() {
       shadow-2xl
       "
     >
-
- 
       {/* subtle dot grid texture */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.06]"
@@ -55,28 +67,15 @@ export default function AssetBreakdown() {
       />
 
       <div className="relative">
-
         <p className="text-[10px] tracking-[0.2em] text-[var(--brand-1-dark)]/80 font-semibold uppercase mb-1 font-mono">
           // Balance Sheet
         </p>
 
-        <h2
-          className="
-          text-2xl
-          font-bold
-          tracking-tight
-          mb-8
-          "
-        >
+        <h2 className="text-2xl font-bold tracking-tight mb-8">
           Asset
         </h2>
 
-        <div
-          className="
-          space-y-3
-          "
-        >
-
+        <div className="space-y-3">
           <div
             className="
             flex
@@ -102,19 +101,8 @@ export default function AssetBreakdown() {
             </div>
 
             <span className="font-mono font-bold text-lg tabular-nums">
-
-              {
-
-                Number(
-                  usdc?.formatted ?? 0
-                )
-
-                .toFixed(2)
-
-              }
-
+              {Number(usdcFormatted ?? 0).toFixed(2)}
             </span>
-
           </div>
 
           <div
@@ -142,27 +130,11 @@ export default function AssetBreakdown() {
             </div>
 
             <span className="font-mono font-bold text-lg tabular-nums">
-
-              {
-
-                Number(
-                  eurc?.formatted ?? 0
-                )
-
-                .toFixed(2)
-
-              }
-
+              {Number(eurcFormatted ?? 0).toFixed(2)}
             </span>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
-
   );
-
 }
