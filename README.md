@@ -1,6 +1,6 @@
 <div align="center">
 
-# ARCora
+# Axoo
 
 ### Swap. Escrow. Own.
 
@@ -19,7 +19,7 @@
 
 ## Overview
 
-ARCora is a Web3 application on **Arc Testnet**, Circle's stablecoin-native L1. It brings together onchain trade escrow, token swaps, cross-chain bridging, and stablecoin transfers into a single interface — built on Arc's officially pre-deployed ERC-8004 / ERC-8183 contracts and Circle's App Kit.
+Axoo is a Web3 application on **Arc Testnet**, Circle's stablecoin-native L1. It brings together onchain trade escrow, token swaps, cross-chain bridging, and stablecoin transfers into a single interface — built on Arc's officially pre-deployed ERC-8004 / ERC-8183 contracts and Circle's App Kit.
 
 Access to the app is gated by a **Genesis Pass NFT**, an ERC-721 contract deployed by this project.
 
